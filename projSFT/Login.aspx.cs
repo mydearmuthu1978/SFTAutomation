@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace projSFT
 {
@@ -13,34 +14,38 @@ namespace projSFT
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+          
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {                    
-
-            SqlConnection con = new SqlConnection(@
-            "Data Source = .\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\SFTautomation.mdf; Integrated Security = True; Connect Timeout = 30");
-            SqlCommand cmd = new SqlCommand("select * from users where username=@username and word=@password", con);
-            cmd.Parameters.AddWithValue("@username", TextBox1.Text);
-            cmd.Parameters.AddWithValue("word", TextBox2.Text);
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["myDbConnection"].ToString());
+            SqlCommand cmd = new SqlCommand("select * from users where username=@username and password=@password", con);
+            cmd.Parameters.AddWithValue("@username", txtUsername.Text);
+            cmd.Parameters.AddWithValue("@password", txtPassword.Text);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
             con.Open();
-
-            int i = cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
             con.Close();
 
             if (dt.Rows.Count > 0)
             {
-                Response.Redirect("Redirectform.aspx");
+                Response.Redirect("main.aspx");
             }
             else
             {
-                Label1.Text = "Your username and word is incorrect";
-                Label1.ForeColor = System.Drawing.Color.Red;
+                lblError.Text = "Incorrect UserName/ Password";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                txtUsername.Text = "";
+                txtPassword.Text = "";
 
             }
         }
+        protected void btnRegister_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("main.aspx");
+        }
+    }
 }
