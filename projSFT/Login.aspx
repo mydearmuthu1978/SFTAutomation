@@ -13,10 +13,11 @@
         border:none;
         border-radius: 25px;
     }
+
     </style>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Login</title>
 </head>   
 <body>  
     <form id="form1" runat="server">  
@@ -57,9 +58,9 @@
                     </tr>
                 <tr>  
                     <td>  <asp:Label ID="lblError" Width="150px" runat="server"></asp:Label>  </td>  
-                    <td class="style2" >  
+                    <td>  
                         <asp:Button ID="btnSubmit" runat="server" Text="Submit" Style="margin-left:30px;margin-top:20px;" onclick="btnSubmit_Click" /> 
-                        <asp:Button ID="btnRegister" runat="server" Text="Register"  Style="margin-left:20px;" OnClick="btnRegister_Click"/> 
+                        <asp:Button ID="btnRegister" runat="server" Text="Register"  Style="margin-left:20px;" CausesValidation="false" OnClick="btnRegister_Click"/> 
                     </td>   
                 </tr> 
             </table>  
