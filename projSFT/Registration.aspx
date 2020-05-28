@@ -79,9 +79,8 @@
                                     ForeColor="Red"/>
                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
                                 ControlToValidate="txtPassword"  width="400px" Height="50px"           
-                                   ErrorMessage="&nbsp;&nbsp;Minimum 8 characters atleast 1 Alphabet,</br>&nbsp;&nbsp;1 Number and 1 Special Character." 
-   
-                                        ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$" ForeColor="Red"/> 
+                                ErrorMessage="&nbsp;&nbsp;Minimum 8 characters atleast 1 Alphabet,</br>&nbsp;&nbsp;1 Number and 1 Special Character."   
+                                ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$" ForeColor="Red"/> 
                     </td>
                     </tr> 
                 <tr>
@@ -93,7 +92,8 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"      
                                 ControlToValidate="txtConfirmPassword" ErrorMessage="&nbsp;&nbsp;&nbsp;Please re enter your Password."
                                     ForeColor="Red"/>
-                          <asp:CompareValidator ID="CompareValidator1" runat="server"  ControlToValidate="txtConfirmPassword" ControlToCompare ="txtPassword"  ErrorMessage="Passwords do not match."
+                          <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="txtConfirmPassword" ControlToCompare ="txtPassword" 
+                              ErrorMessage="</br>&nbsp;&nbsp;&nbsp;Passwords do not match."
                                     ForeColor="Red"/>
                     </td>
                 </tr>

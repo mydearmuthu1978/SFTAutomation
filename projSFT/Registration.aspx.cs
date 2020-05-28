@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,13 +17,25 @@ namespace projSFT
         {
 
         }
+        public string Encryptpassword(string password)
+        {
+            string msg = "";
+            byte[] encode = new byte[password.Length];
+            encode = Encoding.UTF8.GetBytes(password);
+            msg = Convert.ToBase64String(encode);
+            return msg;
+        }
+
         protected void btnRegister_Click(object sender, EventArgs e)
         {
-           
-                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["myDbConnection"].ToString());
-                SqlCommand cmd = new SqlCommand("Insert into users values(@username, @password, @firstname, @lastname)", con);  
+            string connectionString = ConfigurationManager.ConnectionStrings["myDbConnection"].ToString();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string strpass = Encryptpassword(txtPassword.Text);
+                SqlCommand cmd = new SqlCommand("SP_InsertUserDetails", con);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@username", txtUsername.Text);
-                cmd.Parameters.AddWithValue("@password", txtPassword.Text);
+                cmd.Parameters.AddWithValue("@password", strpass);
                 cmd.Parameters.AddWithValue("@firstname", txtFirstname.Text);
                 cmd.Parameters.AddWithValue("@lastname", txtLastname.Text);
                 con.Open();
@@ -34,6 +48,7 @@ namespace projSFT
                 txtFirstname.Text = "";
                 txtLastname.Text = "";
                 Response.Write("<script>alert('Registered Successfully!');</script>");
+            }
         }
         protected void btnCancel_Click(object sender, EventArgs e)
         {

@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Text;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace projSFT
 {
@@ -14,33 +17,46 @@ namespace projSFT
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Session["Username"] = txtUsername.Text;
+            }
+        }
+
+        public string Encryptpassword(string password)
+        {
+            string msg = "";
+            byte[] encode = new byte[password.Length];
+            encode = Encoding.UTF8.GetBytes(password);
+            msg = Convert.ToBase64String(encode);
+            return msg;
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["myDbConnection"].ToString());
-            SqlCommand cmd = new SqlCommand("select * from users where username=@username and password=@password", con);
-            cmd.Parameters.AddWithValue("@username", txtUsername.Text);
-            cmd.Parameters.AddWithValue("@password", txtPassword.Text);
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
+            string connectionString = ConfigurationManager.ConnectionStrings["myDbConnection"].ToString();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            { 
+                SqlCommand cmd = new SqlCommand("SP_LoginUser", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Parameters.AddWithValue("@username", txtUsername.Text);
+                cmd.Parameters.AddWithValue("@password", Encryptpassword(txtPassword.Text));
+                int Username = (Int32)cmd.ExecuteScalar();
+                if (Username == 1)
+                {
+                    Session["Username"] = txtUsername.Text;
+                    Response.Redirect("Transaction.aspx");                    
 
-            if (dt.Rows.Count > 0)
-            {
-                Response.Redirect("main.aspx");
+                }
+                else
+                {
+                    lblError.ForeColor = System.Drawing.Color.Red;
+                    lblError.Text = "Invalid username or password";
+                    txtPassword.Focus();
+                }
             }
-            else
-            {
-                lblError.Text = "Incorrect UserName/ Password";
-                lblError.ForeColor = System.Drawing.Color.Red;
-                txtUsername.Text = "";
-                txtPassword.Text = "";
 
-            }
         }
         protected void btnRegister_Click(object sender, EventArgs e)
         {
