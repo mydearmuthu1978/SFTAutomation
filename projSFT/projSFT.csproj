@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=19.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>packages\AjaxControlToolkit.19.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -67,10 +70,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\SFTautomation.mdf" />
-    <Content Include="App_Data\SFTautomation_log.ldf">
-      <DependentUpon>SFTautomation.mdf</DependentUpon>
-    </Content>
+    <Content Include="App_Data\SFT_Automation.mdf" />
+    <Content Include="App_Data\SFT_Automation_log.ldf" />
     <Content Include="content.aspx" />
     <Content Include="css\master.css" />
     <Content Include="images\mphasis_bottom-logo.png" />
@@ -79,6 +80,7 @@
     <Content Include="programs.aspx" />
     <Content Include="Registration.aspx" />
     <Content Include="Resources\programs.xml" />
+    <Content Include="SectionDetails.aspx" />
     <Content Include="Topmenu.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -118,6 +120,13 @@
     </Compile>
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SectionDetails.aspx.cs">
+      <DependentUpon>SectionDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SectionDetails.aspx.designer.cs">
+      <DependentUpon>SectionDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Topmenu.aspx.cs">
       <DependentUpon>Topmenu.aspx</DependentUpon>

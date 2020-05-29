@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cn %>" SelectCommand="SELECT [name] FROM [programs]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:myDbConnection %>" SelectCommand="SELECT [name] FROM [programs]"></asp:SqlDataSource>
         <asp:Panel ID="Panel1" runat="server" Height="358px" Width="254px">
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Height="345px" Width="240px">
                 <Columns>

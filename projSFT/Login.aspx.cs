@@ -46,7 +46,7 @@ namespace projSFT
                 if (Username == 1)
                 {
                     Session["Username"] = txtUsername.Text;
-                    Response.Redirect("Transaction.aspx");                    
+                    Response.Redirect("Topmenu.aspx");                    
 
                 }
                 else
