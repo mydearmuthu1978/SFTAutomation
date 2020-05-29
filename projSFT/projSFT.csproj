@@ -72,6 +72,8 @@
       <DependentUpon>SFTautomation.mdf</DependentUpon>
     </Content>
     <Content Include="content.aspx" />
+    <Content Include="css\master.css" />
+    <Content Include="images\mphasis_bottom-logo.png" />
     <Content Include="Login.aspx" />
     <Content Include="main.aspx" />
     <Content Include="programs.aspx" />

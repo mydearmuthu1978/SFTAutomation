@@ -68,8 +68,12 @@
                         <asp:Button ID="btnRegister" runat="server" Text="Register"  Style="margin-left:20px;" CausesValidation="false" OnClick="btnRegister_Click"/> 
                     </td>   
                 </tr> 
-            </table>  
-        </div>  
+            </table>              
+        </div> 
+      <div id="footerContent">
+        <img src="images/mphasis_bottom-logo.png" />        
+      </div>   
     </form>  
+    
 </body> 
 </html>
