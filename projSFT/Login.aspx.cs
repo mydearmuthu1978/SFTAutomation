@@ -36,7 +36,7 @@ namespace projSFT
         {
             string connectionString = ConfigurationManager.ConnectionStrings["myDbConnection"].ToString();
             using (SqlConnection con = new SqlConnection(connectionString))
-            { 
+            {
                 SqlCommand cmd = new SqlCommand("SP_LoginUser", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
@@ -46,13 +46,12 @@ namespace projSFT
                 if (Username == 1)
                 {
                     Session["Username"] = txtUsername.Text;
-                    Response.Redirect("Topmenu.aspx");                    
+                    Response.Redirect("Topmenu.aspx");
 
                 }
                 else
                 {
-                    lblError.ForeColor = System.Drawing.Color.Red;
-                    lblError.Text = "Invalid username or password";
+                    lblError.Text = "Invalid Username/</br>Password";
                     txtPassword.Focus();
                 }
             }

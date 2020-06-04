@@ -31,6 +31,11 @@ namespace projSFT
             string connectionString = ConfigurationManager.ConnectionStrings["myDbConnection"].ToString();
             using (SqlConnection con = new SqlConnection(connectionString))
             {
+                string userType = "A";
+                if (drpUserType.SelectedItem.Value == "Mphasis_Developer")
+                {
+                    userType = "D";
+                }
                 string strpass = Encryptpassword(txtPassword.Text);
                 SqlCommand cmd = new SqlCommand("SP_InsertUserDetails", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -38,6 +43,7 @@ namespace projSFT
                 cmd.Parameters.AddWithValue("@password", strpass);
                 cmd.Parameters.AddWithValue("@firstname", txtFirstname.Text);
                 cmd.Parameters.AddWithValue("@lastname", txtLastname.Text);
+                cmd.Parameters.AddWithValue("@usertype", userType);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -47,6 +53,7 @@ namespace projSFT
                 txtPassword.Text = "";
                 txtFirstname.Text = "";
                 txtLastname.Text = "";
+                drpUserType.SelectedValue = "";
                 Response.Write("<script>alert('Registered Successfully!');</script>");
             }
         }
