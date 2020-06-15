@@ -79,7 +79,9 @@
     <Content Include="css\master.css" />
     <Content Include="DynamicTexBox.aspx" />
     <Content Include="Estimates.aspx" />
+    <Content Include="images\minus.png" />
     <Content Include="images\mphasis_bottom-logo.png" />
+    <Content Include="images\plus.png" />
     <Content Include="jscript\Task.js" />
     <Content Include="Login.aspx" />
     <Content Include="main.aspx" />
