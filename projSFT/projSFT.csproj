@@ -70,19 +70,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\SFT_Automation.mdf" />
-    <Content Include="App_Data\SFT_Automation_log.ldf" />
+    <Content Include="App_Data\SFTautomation.mdf" />
+    <Content Include="App_Data\SFTautomation_log.ldf">
+      <DependentUpon>SFTautomation.mdf</DependentUpon>
+    </Content>
     <Content Include="content.aspx" />
+    <Content Include="CRUDNestedGrid.aspx" />
     <Content Include="css\master.css" />
+    <Content Include="DynamicTexBox.aspx" />
+    <Content Include="Estimates.aspx" />
     <Content Include="images\mphasis_bottom-logo.png" />
+    <Content Include="jscript\Task.js" />
     <Content Include="Login.aspx" />
     <Content Include="main.aspx" />
     <Content Include="programs.aspx" />
     <Content Include="Registration.aspx" />
     <Content Include="Resources\programs.xml" />
     <Content Include="SectionDetails.aspx" />
+    <Content Include="Summary.aspx" />
+    <Content Include="SummaryDetails.aspx" />
     <Content Include="Topmenu.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="content.aspx.cs">
@@ -91,6 +102,27 @@
     </Compile>
     <Compile Include="content.aspx.designer.cs">
       <DependentUpon>content.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CRUDNestedGrid.aspx.cs">
+      <DependentUpon>CRUDNestedGrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CRUDNestedGrid.aspx.designer.cs">
+      <DependentUpon>CRUDNestedGrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicTexBox.aspx.cs">
+      <DependentUpon>DynamicTexBox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DynamicTexBox.aspx.designer.cs">
+      <DependentUpon>DynamicTexBox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Estimates.aspx.cs">
+      <DependentUpon>Estimates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Estimates.aspx.designer.cs">
+      <DependentUpon>Estimates.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -113,6 +145,13 @@
     <Compile Include="programs.aspx.designer.cs">
       <DependentUpon>programs.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ProjectManagement.Master.cs">
+      <DependentUpon>ProjectManagement.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectManagement.Master.designer.cs">
+      <DependentUpon>ProjectManagement.Master</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
@@ -128,6 +167,20 @@
     <Compile Include="SectionDetails.aspx.designer.cs">
       <DependentUpon>SectionDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Summary.aspx.cs">
+      <DependentUpon>Summary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Summary.aspx.designer.cs">
+      <DependentUpon>Summary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SummaryDetails.aspx.cs">
+      <DependentUpon>SummaryDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SummaryDetails.aspx.designer.cs">
+      <DependentUpon>SummaryDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Topmenu.aspx.cs">
       <DependentUpon>Topmenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -135,9 +188,17 @@
     <Compile Include="Topmenu.aspx.designer.cs">
       <DependentUpon>Topmenu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="ProjectManagement.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

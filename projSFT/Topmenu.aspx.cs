@@ -19,8 +19,7 @@ namespace projSFT
             try
             {
                 con = new SqlConnection();
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["myDbConnection"].ToString();
-                //conString = System.Configuration.ConfigurationManager.ConnectionStrings["connectionString"].ToString();
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["SFT_AutomationConnectionString"].ToString();
             }
             catch (Exception)
             {
@@ -31,8 +30,7 @@ namespace projSFT
         {
             if (!Page.IsPostBack)
             {
-                bindmenu();
-                //Menu Menu = (Menu)Page.Master.FindControl("NavigationMenu");
+                bindmenu();                
                 Menu Menu = (Menu)Page.FindControl("NavigationMenu");
                 if (Menu.Items.Count > 0)
                 {
@@ -44,8 +42,37 @@ namespace projSFT
                         }
                     }
                 }
-            }
 
+                BindMenuData();
+                Menu menu = (Menu)Page.FindControl("VerticalMenu");
+                if (Menu.Items.Count > 0)
+                {
+                    foreach (MenuItem mi in Menu.Items)
+                    {
+                        if (mi.Text == "CONNECTIVITY")
+                        {
+                            mi.Selected = true;
+                        }
+                    }
+                }
+            }        
+
+        }
+        private void BindMenuData()
+        {
+            con.Open();
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            string sql = "select * from [programs]";
+            SqlDataAdapter da = new SqlDataAdapter(sql, con);
+            da.Fill(ds);
+            dt = ds.Tables[0];
+            DataRow[] droparent = dt.Select("Id >" + 0);
+            foreach (DataRow dr in droparent)
+            {
+                VerticalMenu.Items.Add(new MenuItem(dr["name"].ToString()));                
+            }
+            con.Close();
         }
         private void bindmenu()
         {
@@ -58,80 +85,13 @@ namespace projSFT
             dt = ds.Tables[0];
             DataRow[] droparent = dt.Select("Id >" + 0);
             foreach (DataRow dr in droparent)
-            {
-                //NavigationMenu.Items.Add(new MenuItem(dr["Id"].ToString(), dr["menuname"].ToString()));
-                NavigationMenu.Items.Add(new MenuItem(dr["menuname"].ToString()));
+            {                
+                NavigationMenu.Items.Add(new MenuItem(dr["menuname"].ToString())); 
             }
-            //foreach (DataRow dr in dt.Select("Id >" + 0))
-            //{
-            //    MenuItem men1 = new MenuItem(dr["Id"].ToString(), dr["menuname"].ToString());
-            //    NavigationMenu.FindItem(dr["Id"].ToString()).ChildItems.Add(men1);
-            //}
-            using (SqlCommand cmd = new SqlCommand("SELECT Id, name FROM programs"))
-            {
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = con;
-                //con.Open();
-                ProgramList.DataSource = cmd.ExecuteReader();
-                ProgramList.DataTextField = "name";
-                ProgramList.DataValueField = "Id";
-                ProgramList.DataBind();
-
-                ProgramList.Rows = ProgramList.Items.Count;
-
-                //find specific items from listbox
-                var items = from ListItem li in ProgramList.Items
-                            where li.Text.Contains("CON")
-                            select li;
-
-                //programmatically select specific items 
-                //by default first time those items are selected.
-                foreach (ListItem li in items)
-                {
-                    li.Selected = true;
-                }
-                //con.Close();
-            }
+            con.Close();            
         }
-        protected void NavigationMenu_MenuItemClick(object sender, MenuEventArgs e)
-        {
-            //con.ConnectionString = ConfigurationManager.ConnectionStrings["cn"].ToString();
-            //if (NavigationMenu.SelectedItem.Value == "1")
-            //{
-            //    SqlCommand cmd = new SqlCommand("Select * from App_testcases", con);
-            //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            //    DataTable dt = new DataTable();
-            //    sda.Fill(dt);
-            //    GridView1.DataSource = dt;
-            //    GridView1.DataBind();
-            //}
-
-            //if (e.Item.Selected == true)
-            //{                
-            //    Response.Redirect("~/main.aspx");
-            //}
-
-            //for (int i = 0; i < NavigationMenu.Items.Count; i++)
-            //{
-            //    String tmpNav = NavigationMenu.Items[i].NavigateUrl.ToLower();
-            //    if (tmpNav.Contains(tmpNav))
-            //    {
-            //        NavigationMenu.Items[i].Selected = true;
-            //    }
-            //}
-            //Response.Redirect("~/content.aspx");
-
-            //Get list of the programs.
-
-            ProgramList.Rows = ProgramList.Items.Count;
-
-            //string val = ProgramList.Text.Trim();
-
-            //find specific items from listbox
-            var items = from ListItem li in ProgramList.Items
-                        where li.Text.Contains(ProgramList.Text)
-                        select li;
-
+        protected void NavigationMenu_MenuItemClick1(object sender, MenuEventArgs e)
+        {              
             // Get the menu item being bound to data.
             MenuItem item = e.Item;
 
@@ -140,21 +100,34 @@ namespace projSFT
             if (item.Text == "Scope")
             {
                 item.Selected = true;
-                Response.Redirect("~/content.aspx");
+                SqlCommand cmd = new SqlCommand("SELECT Appname, Priority,Testcases FROM App_testcases", con);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    GridView1.DataSource = dt;
+                    GridView1.DataBind();
+                }
             }
             else if (item.Text == "Summary")
             {
                 item.Selected = true;
-                Response.Redirect("~/main.aspx");
+                Response.Redirect("~/Summary.aspx");
             }
             else if (item.Text == "Estimate")
             {
                 item.Selected = true;
+                Response.Redirect("Estimates.aspx");
             }
 
         }
 
-        protected void Menu1_MenuItemDataBound(object sender, MenuEventArgs e)
+        protected void Menu1_MenuItemDataBound1(object sender, MenuEventArgs e)
         {
             if (SiteMap.CurrentNode != null)
             {

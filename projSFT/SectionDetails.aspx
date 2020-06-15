@@ -21,7 +21,7 @@
                     <table width="100%">
                          <tr>
                             <td align="right" width="70%">
-                            <asp:Button ID="btnAddNew1" runat="server" Text="Add New" OnClick="btnAddNew_Click" />
+                            <asp:Button ID="btnAddNew1" runat="server" Text="Add New Section" OnClick="btnAddNew_Click" />
                             <td></td>
                             <td></td>
                         </tr>
@@ -96,7 +96,7 @@
                                </td>
                             </tr>
                     </table>
-                    <!--Panel to add new record-->
+ <!--Panel to add new record-->
  <ajaxToolkit:ModalPopupExtender ID="mpe1" runat="server" 
               TargetControlID="btnAddNew1" 
               PopupControlID="panelAddNew" 

@@ -17,7 +17,7 @@
                 <asp:BoundField DataField="Testcases" HeaderText="Testcases" SortExpression="Testcases" />
             </Columns>
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:myDbConnection %>" SelectCommand="SELECT [Appname], [Priority], [Testcases] FROM [App_testcases]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SFT_AutomationConnectionString %>" SelectCommand="SELECT [Appname], [Priority], [Testcases] FROM [App_testcases]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

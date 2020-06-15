@@ -21,7 +21,7 @@ namespace projSFT
         protected void Page_Load(object sender, EventArgs e)
         {
             con = new SqlConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["myDbConnection"].ConnectionString;
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["SFT_AutomationConnectionString"].ConnectionString;
             if (!Page.IsPostBack)
             {
                 //GridViewBind();                
@@ -30,16 +30,6 @@ namespace projSFT
         }
         private void Bind_Data()
         {
-            //sqlQry = "select e.AppName,e.Section,e.SectionType,e.TimeTaken from App_Details e,App_testcases d where e.ID=d.Id";
-            ////sqlQry = "select * from App_Details";
-            //da = new SqlDataAdapter(sqlQry, con);
-            //ds = new DataSet();
-            //da.Fill(ds, "App_Details");
-            ////da.Fill(ds);
-            //GridView1.DataSource = ds.Tables[0];
-            //GridView1.DataMember = "App_Details";
-            //GridView1.DataBind();
-
             //New logic
 
             //GridView1.DataSource = ds.Tables[0].Rows.Count;

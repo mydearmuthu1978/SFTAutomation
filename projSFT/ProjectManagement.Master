@@ -1,0 +1,157 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ProjectManagement.master.cs" Inherits="projSFT.ProjectManagement" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ 
+ <title></title>
+ <asp:ContentPlaceHolder id="head" runat="server">
+ </asp:ContentPlaceHolder>
+ <link href="Styles.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">  
+        body {  
+            background-color: mediumaquamarine;  
+            font-family: Arial;  
+            font-size: 10pt;  
+            color: #444;  
+        }  
+  
+        .ParentMenu, .ParentMenu:hover {  
+            width: 100px;  
+            background-color: #fff;  
+            color: #333;  
+            text-align: center;  
+            height: 30px;  
+            line-height: 30px;  
+            margin-right: 5px;  
+        }  
+        .ParentMenu:hover 
+        {  
+            background-color: #ccc;  
+        }  
+        .ChildMenu, .ChildMenu:hover 
+        {  
+            width: 110px;  
+            background-color: #fff;  
+            color: #333;  
+            text-align: center;  
+            height: 30px;  
+            line-height: 30px;  
+            margin-top: 5px;  
+        }  
+        .ChildMenu:hover 
+        {  
+            background-color: #ccc;  
+        }  
+        .selected, .selected:hover 
+        {  
+            background-color: #A6A6A6 !important;  
+            color: #fff;  
+        }  
+        .level2 
+        {  
+            background-color: #fff;  
+        }  
+        #footer
+        {
+            width: 100%;
+            background-color: #C0C0C0;
+            height: 50px;
+            position:absolute;
+            bottom: 0;
+            color: White;
+            text-align: center;
+        }
+        #content
+        {
+            width: 1000px;
+            height: 100%;
+            background-color: #F5FDEC;  
+            margin: 0 auto 0 auto;
+        }
+        .TACenter { text-align:center; }
+        .nav_style
+         {
+             list-style:none;
+             font:14px calibri;
+             background-color: none;
+             padding: 10px;
+         }
+        .nav_style:hover
+         {
+             background-color:red;
+         }
+        .selected .nav_style{
+            background-color: yellow;
+         }
+        .nav a:active
+        {
+            background-color:#DDF;    
+        }
+        ul.nav {list-style:none; padding-left:0; }
+        ul.nav li {display:inline-block}
+    </style>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div id="topContent">
+ <table border="0" class="tbl"> 
+     <tr>  
+         <td style="width:30%"></td>  
+            <td style ="width:70%">
+                <asp:menu id="NavigationMenu" CssClass="nav" orientation="Horizontal" font-names="Arial" target="_blank" runat="server" 
+                    OnMenuItemClick="NavigationMenu_MenuItemClick1" 
+                    OnMenuItemDataBound="Menu1_MenuItemDataBound1">
+                    <LevelMenuItemStyles>
+                        <asp:MenuItemStyle CssClass="ParentMenu" />
+                        <asp:MenuItemStyle CssClass="selected" />
+                    </LevelMenuItemStyles>
+                    <DynamicSelectedStyle CssClass ="selected" />
+                    <StaticSelectedStyle CssClass="selected" />
+                    <StaticSelectedStyle backcolor="LightBlue" borderstyle="Solid" bordercolor="Black" borderwidth="1"/>
+                </asp:menu>
+            </td>
+     </tr>
+ </table>
+ </div> 
+ <div id="leftContent">
+      <table style="vertical-align:top">
+          <tr>
+              <td style="width: 20% ;vertical-align:top,text-top">
+                  <table style="width: 100% ;vertical-align:top">
+                      <tr>
+                          <td>
+                              <asp:Label ID="Label1" runat="server" Text="PROGRAM"></asp:Label>   
+                         </td>    
+                     </tr>
+                     <tr>
+                         <td>                    
+                             <asp:Menu ID="VerticalMenu" runat="server" orientation="Vertical" font-names="Arial" target="_blank" 
+                                 OnMenuItemClick="NavigationMenu_MenuItemClick2" 
+                                 OnMenuItemDataBound="Menu1_MenuItemDataBound2">
+                                 <LevelMenuItemStyles>
+                                     <asp:MenuItemStyle CssClass="ChildMenu" />
+                                     <asp:MenuItemStyle CssClass="selected" />
+                                 </LevelMenuItemStyles>
+                                 <StaticSelectedStyle CssClass="selected" />
+                                 <StaticSelectedStyle backcolor="LightBlue" borderstyle="Solid" bordercolor="Black" borderwidth="1"/>
+                                 <DynamicSelectedStyle CssClass ="selected" />
+                             </asp:Menu>
+                         </td>
+                     </tr>
+                  </table>
+              </td>
+              <td style="width:80%;vertical-align:top">
+                  <asp:ContentPlaceHolder id="MainContent" runat="server">
+                  </asp:ContentPlaceHolder>
+              </td>
+         </tr>
+      </table>
+ </div> 
+ <div id="footer" style="width:100%">
+     <img src="images/mphasis_bottom-logo.png" /> 
+ </div>
+ </form>
+</body>
+</html>
