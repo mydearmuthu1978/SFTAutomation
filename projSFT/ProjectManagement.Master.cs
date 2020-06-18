@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -30,9 +31,10 @@ namespace projSFT
         {
             if (!Page.IsPostBack)
             {
-                bindmenu();              
+                bindmenu();
 
-                BindMenuData();                
+                BindMenuData();
+                lblUsername.Text = "Welcome " + (string)Session["Username"];
             }
 
         }
@@ -51,7 +53,7 @@ namespace projSFT
             DataRow[] droparent = dt.Select("Id >" + 0);
             foreach (DataRow dr in droparent)
             {
-                VerticalMenu.Items.Add(new MenuItem(dr["name"].ToString())); 
+                VerticalMenu.Items.Add(new MenuItem(dr["name"].ToString()));
                 //VerticalMenu bind corresponding it to index bind to estimate page
             }
         }
@@ -111,7 +113,7 @@ namespace projSFT
         ///
         ///Displaying left menu item
         ///
-        protected void NavigationMenu_MenuItemClick2(object sender, MenuEventArgs e)
+        public void NavigationMenu_MenuItemClick2(object sender, MenuEventArgs e)
         {
             
         }
@@ -124,6 +126,35 @@ namespace projSFT
                     e.Item.Selected = true;
                 }
             }
+        }
+
+        protected void btnupdate_Click(object sender, EventArgs e)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["SFT_AutomationConnectionString"].ToString();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("prcUpdatePassword", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", Session["Id"]);
+                cmd.Parameters.AddWithValue("@password", Encryptpassword(txtPassword.Text));
+                con.Open();
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                txtPassword.Text = "";
+                txtConfirmPassword.Text = "";
+                Response.Write("<script>alert('Password Updated Successfully!');</script>");            
+
+            }
+        }
+
+        public string Encryptpassword(string password)
+        {
+            string msg = "";
+            byte[] encode = new byte[password.Length];
+            encode = Encoding.UTF8.GetBytes(password);
+            msg = Convert.ToBase64String(encode);
+            return msg;
         }
     }
 }

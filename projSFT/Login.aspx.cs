@@ -37,16 +37,23 @@ namespace projSFT
             string connectionString = ConfigurationManager.ConnectionStrings["SFT_AutomationConnectionString"].ToString();
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("SP_LoginUser", con);
+                SqlCommand cmd = new SqlCommand("prcLoginUser", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
                 cmd.Parameters.AddWithValue("@username", txtUsername.Text);
                 cmd.Parameters.AddWithValue("@password", Encryptpassword(txtPassword.Text));
-                int Username = (Int32)cmd.ExecuteScalar();
-                if (Username == 1)
+                //int Username = (Int32)cmd.ExecuteScalar();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                if (dt.Rows.Count > 0)
                 {
                     Session["Username"] = txtUsername.Text;
-                    Response.Redirect("Topmenu.aspx");
+                    Session["Id"] = dt.Rows[0].ItemArray[0];
+                    Response.Redirect("WebForm1.aspx");
 
                 }
                 else

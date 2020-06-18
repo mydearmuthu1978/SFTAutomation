@@ -9,40 +9,40 @@
  <asp:ContentPlaceHolder id="head" runat="server">
  </asp:ContentPlaceHolder>
  <link href="Styles.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">  
-        body {  
-            background-color: mediumaquamarine;  
-            font-family: Arial;  
-            font-size: 10pt;  
-            color: #444;  
-        }  
-  
+    <style type="text/css">          
+        .tbl
+        {
+            width:100%;
+            text-align:left;
+        }
         .ParentMenu, .ParentMenu:hover {  
-            width: 100px;  
-            background-color: #fff;  
-            color: #333;  
+            width: 120px;  
+            background-color: #9353A1;  
+            color: white;  
             text-align: center;  
             height: 30px;  
             line-height: 30px;  
-            margin-right: 5px;  
+            margin-right: 5px;
         }  
         .ParentMenu:hover 
         {  
-            background-color: #ccc;  
+            background-color: purple;  
         }  
         .ChildMenu, .ChildMenu:hover 
         {  
-            width: 110px;  
-            background-color: #fff;  
-            color: #333;  
-            text-align: center;  
+            width: 120px;  
+            background-color: #9353A1;  
+            color: white;  
+            text-align: left;  
             height: 30px;  
             line-height: 30px;  
-            margin-top: 5px;  
+            margin-top: 20px;  
+            margin-left:15px;
+           /* font:bold;*/
         }  
         .ChildMenu:hover 
         {  
-            background-color: #ccc;  
+            background-color: purple;  
         }  
         .selected, .selected:hover 
         {  
@@ -56,19 +56,56 @@
         #footer
         {
             width: 100%;
-            background-color: #C0C0C0;
-            height: 50px;
-            position:absolute;
+            background-color: #9353A1;
+            height: 10%;
+            position:fixed;
             bottom: 0;
             color: White;
             text-align: center;
         }
         #content
         {
-            width: 1000px;
+            width: 85%;
             height: 100%;
-            background-color: #F5FDEC;  
-            margin: 0 auto 0 auto;
+            background-color: white; 
+            position:fixed;
+            right:0;
+           /* margin: 0 auto 0 auto;*/
+        }
+        #topContent 
+        {
+            text-align: right;
+            background-color: #9353A1;
+            color: white;
+            font-size: large;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px;
+            height: 8%;
+            position:fixed;
+            width:100%;
+            left:0;
+            top:0;
+        } 
+        #bodyContent
+        {
+            width:100%;
+            height:80%;
+            margin-top:3%;
+            background-color:#9353A1;
+            position:fixed;
+         
+        }
+        #leftContent
+        {
+            margin-top:0;
+            left:0;
+            background-color:#9353A1;
+            width:15%;
+            height: 100%;
+            position:fixed;
+            font-size: medium;
+            font-weight: bold;
         }
         .TACenter { text-align:center; }
         .nav_style
@@ -89,17 +126,47 @@
         {
             background-color:#DDF;    
         }
+
+        .button
+        {
+            background-color: #9353A1;
+            border: none;
+            color: white;
+            height: auto;
+            width: auto;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: small;
+            padding: 10px 24px;
+            border-radius: 4px;
+            box-shadow: 1px 1px;
+            text-shadow: 2px 2px 2px purple;
+        }
+
+        .button:hover 
+        {
+            background-color: purple;
+            color: white;
+        }
         ul.nav {list-style:none; padding-left:0; }
         ul.nav li {display:inline-block}
+        .auto-style5 {
+            left: 8px;
+            top: 15px;
+            width: 1030px;
+        }
     </style>
 </head>
 <body>
  <form id="form1" runat="server">
  <div id="topContent">
- <table border="0" class="tbl"> 
+ <table class="tbl" border="0"> 
      <tr>  
-         <td style="width:30%"></td>  
-            <td style ="width:70%">
+         <td style="width:15%">            
+         </td>  
+            <td style ="width:63%">
                 <asp:menu id="NavigationMenu" CssClass="nav" orientation="Horizontal" font-names="Arial" target="_blank" runat="server" 
                     OnMenuItemClick="NavigationMenu_MenuItemClick1" 
                     OnMenuItemDataBound="Menu1_MenuItemDataBound1">
@@ -112,21 +179,82 @@
                     <StaticSelectedStyle backcolor="LightBlue" borderstyle="Solid" bordercolor="Black" borderwidth="1"/>
                 </asp:menu>
             </td>
+         <td style ="width:10%;">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+             <asp:LinkButton ID="btnChangePassword"  Text="Reset Password" Font-Size="Medium" runat="server" ForeColor="White" Font-Bold="True" Font-Italic="False"></asp:LinkButton>
+               <ajaxToolkit:ModalPopupExtender ID="mpe1" runat="server" 
+              TargetControlID="btnChangePassword" 
+              PopupControlID="panelResetPassword" 
+              RepositionMode="RepositionOnWindowResizeAndScroll"              
+              PopupDragHandleControlID="panelResetPasswordTitle" 
+              BackgroundCssClass="modalBackground"  >
+            </ajaxToolkit:ModalPopupExtender>
+             <asp:Panel ID="panelResetPassword" runat="server" style="display:none; border:double ;background-color:White; margin-top:5px;text-align:left;" ForeColor="Black" Width="580" Height="250">
+            <asp:Panel ID="panelResetPasswordTitle" runat="server" style="cursor:move;padding:2px;" HorizontalAlign="Right" BackColor="#9353A1" ForeColor="White" Height="25" ></asp:Panel>
+            <table style="margin-top:0;" border="0">              
+                            <tr>
+                                <td>
+                                <asp:Label ID="lblPassword" runat="server" Text="New Password:" ForeColor="#9353A1" Width="150"></asp:Label>
+                                    </td>
+                                <td>
+                                <asp:TextBox ID="txtPassword" runat="server" Text="" TextMode="Password" Width="150"></asp:TextBox>
+                                    </td>                        
+                                <td>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"      
+                                    ControlToValidate="txtPassword" ErrorMessage="Please enter your Password." Font-Size="Medium"
+                                    ForeColor="Red"/>
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <td></td>
+                                 <td colspan="3">
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                                ControlToValidate="txtPassword"           
+                                ErrorMessage="Minimum 8 characters atleast 1 Alphabet,1 Number and 1 Special Character."  Font-Size="Medium"
+                                ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$" ForeColor="Red"/>                                              
+                                </td>
+                                </tr>
+                             <tr>
+                                <td>
+                                <asp:Label ID="lblConfirmPassword" runat="server" Text="Confirm Password:" ForeColor="#9353A1" Width="150"></asp:Label>
+                                    </td>
+                                <td>
+                                <asp:TextBox ID="txtConfirmPassword" runat="server" Text="" TextMode="Password" Width="150"></asp:TextBox>
+                                    </td>
+                             <td>   <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"      
+                                ControlToValidate="txtConfirmPassword" ErrorMessage="Please re enter your Password." Font-Size="Medium"
+                                    ForeColor="Red"/>
+                                 </td></tr>
+                            <tr>
+                                  <td></td>
+                                <td colspan="3">
+                            <asp:CompareValidator ID="CompareValidator1" runat="server"  ControlToValidate="txtConfirmPassword" ControlToCompare ="txtPassword" 
+                              ErrorMessage="Passwords do not match."  Font-Size="Medium"
+                                    ForeColor="Red"/>
+                              </td>  </tr>
+                            <tr> 
+                                <asp:Label ID="lbl" runat="server"></asp:Label>
+                            </tr>
+                            <tr>
+                                  <td></td>
+                                <td colspan="2">
+                                    <asp:Button ID="btnupdate" runat="server" Text="Update"  class="button" OnClick="btnupdate_Click"/>
+                                    <asp:Button ID="btnClose" runat="server" Text="Close"  CausesValidation="false" class="button"/>
+                                </td>
+                            </tr>
+                            </table>
+     </asp:Panel>
+         </td>
+         <td style ="width:12%;"> <asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>
+             </td>
      </tr>
  </table>
  </div> 
- <div id="leftContent">
-      <table style="vertical-align:top">
-          <tr>
-              <td style="width: 20% ;vertical-align:top,text-top">
-                  <table style="width: 100% ;vertical-align:top">
-                      <tr>
-                          <td>
-                              <asp:Label ID="Label1" runat="server" Text="PROGRAM"></asp:Label>   
-                         </td>    
-                     </tr>
+ <div id="bodyContent">
+                  <table>                     
                      <tr>
-                         <td>                    
+                         <td>  
+                             <div  id="leftContent">
                              <asp:Menu ID="VerticalMenu" runat="server" orientation="Vertical" font-names="Arial" target="_blank" 
                                  OnMenuItemClick="NavigationMenu_MenuItemClick2" 
                                  OnMenuItemDataBound="Menu1_MenuItemDataBound2">
@@ -138,18 +266,19 @@
                                  <StaticSelectedStyle backcolor="LightBlue" borderstyle="Solid" bordercolor="Black" borderwidth="1"/>
                                  <DynamicSelectedStyle CssClass ="selected" />
                              </asp:Menu>
+                                 </div>
                          </td>
-                     </tr>
-                  </table>
-              </td>
-              <td style="width:80%;vertical-align:top">
+                   
+                  <td>
+                   <div id="content">
                   <asp:ContentPlaceHolder id="MainContent" runat="server">
                   </asp:ContentPlaceHolder>
+                       </div>
               </td>
          </tr>
       </table>
  </div> 
- <div id="footer" style="width:100%">
+ <div id="footer">
      <img src="images/mphasis_bottom-logo.png" /> 
  </div>
  </form>
