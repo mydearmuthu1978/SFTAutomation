@@ -46,8 +46,8 @@
         }  
         .selected, .selected:hover 
         {  
-            background-color: #A6A6A6 !important;  
-            color: #fff;  
+            background-color: purple;  
+            color: White;  
         }  
         .level2 
         {  
@@ -176,7 +176,7 @@
                     </LevelMenuItemStyles>
                     <DynamicSelectedStyle CssClass ="selected" />
                     <StaticSelectedStyle CssClass="selected" />
-                    <StaticSelectedStyle backcolor="LightBlue" borderstyle="Solid" bordercolor="Black" borderwidth="1"/>
+                    <StaticSelectedStyle backcolor="purple" borderstyle="Solid" bordercolor="Black" borderwidth="1"/>
                 </asp:menu>
             </td>
          <td style ="width:10%;">
@@ -263,7 +263,7 @@
                                      <asp:MenuItemStyle CssClass="selected" />
                                  </LevelMenuItemStyles>
                                  <StaticSelectedStyle CssClass="selected" />
-                                 <StaticSelectedStyle backcolor="LightBlue" borderstyle="Solid" bordercolor="Black" borderwidth="1"/>
+                                 <StaticSelectedStyle backcolor="Purple" borderstyle="Solid" bordercolor="Black" borderwidth="1"/>
                                  <DynamicSelectedStyle CssClass ="selected" />
                              </asp:Menu>
                                  </div>
