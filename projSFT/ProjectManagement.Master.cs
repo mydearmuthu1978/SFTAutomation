@@ -43,7 +43,7 @@ namespace projSFT
             ///new logic
             con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["SFT_AutomationConnectionString"].ToString();
-            SqlCommand cmd = new SqlCommand("select Id, name from programs", con);
+            SqlCommand cmd = new SqlCommand("select Id, ProgName from program", con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -53,7 +53,7 @@ namespace projSFT
             DataRow[] droparent = dt.Select("Id >" + 0);
             foreach (DataRow dr in droparent)
             {
-                VerticalMenu.Items.Add(new MenuItem(dr["name"].ToString()));
+                VerticalMenu.Items.Add(new MenuItem(dr["ProgName"].ToString()));
                 //VerticalMenu bind corresponding it to index bind to estimate page
             }
         }

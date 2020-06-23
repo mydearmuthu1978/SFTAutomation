@@ -41,7 +41,6 @@ namespace projSFT
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@username", txtUsername.Text);
                 cmd.Parameters.AddWithValue("@password", Encryptpassword(txtPassword.Text));
-                //int Username = (Int32)cmd.ExecuteScalar();
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
@@ -53,7 +52,7 @@ namespace projSFT
                 {
                     Session["Username"] = txtUsername.Text;
                     Session["Id"] = dt.Rows[0].ItemArray[0];
-                    Response.Redirect("WebForm1.aspx");
+                    Response.Redirect("Scope.aspx");
 
                 }
                 else

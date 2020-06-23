@@ -37,7 +37,7 @@ namespace projSFT
                     userType = "D";
                 }
                 string strpass = Encryptpassword(txtPassword.Text);
-                SqlCommand cmd = new SqlCommand("SP_InsertUserDetails", con);
+                SqlCommand cmd = new SqlCommand("prcAddUsers", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@username", txtUsername.Text);
                 cmd.Parameters.AddWithValue("@password", strpass);

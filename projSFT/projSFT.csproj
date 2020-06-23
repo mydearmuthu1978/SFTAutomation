@@ -70,10 +70,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\SFTautomation.mdf" />
-    <Content Include="App_Data\SFTautomation_log.ldf">
-      <DependentUpon>SFTautomation.mdf</DependentUpon>
-    </Content>
+    <Content Include="App_Data\SFT_Automation.mdf" />
+    <Content Include="App_Data\SFT_Automation_log.ldf" />
     <Content Include="content.aspx" />
     <Content Include="CRUDNestedGrid.aspx" />
     <Content Include="css\master.css" />
@@ -91,7 +89,7 @@
     <Content Include="SectionDetails.aspx" />
     <Content Include="Summary.aspx" />
     <Content Include="SummaryDetails.aspx" />
-    <Content Include="Topmenu.aspx" />
+    <Content Include="Scope.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -183,12 +181,12 @@
     <Compile Include="SummaryDetails.aspx.designer.cs">
       <DependentUpon>SummaryDetails.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Topmenu.aspx.cs">
-      <DependentUpon>Topmenu.aspx</DependentUpon>
+    <Compile Include="Scope.aspx.cs">
+      <DependentUpon>Scope.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Topmenu.aspx.designer.cs">
-      <DependentUpon>Topmenu.aspx</DependentUpon>
+    <Compile Include="Scope.aspx.designer.cs">
+      <DependentUpon>Scope.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm2.aspx.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
