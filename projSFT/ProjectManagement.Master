@@ -181,7 +181,7 @@
             </td>
          <td style ="width:10%;">
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-             <asp:LinkButton ID="btnChangePassword"  Text="Reset Password" Font-Size="Medium" runat="server" ForeColor="White" Font-Bold="True" Font-Italic="False"></asp:LinkButton>
+             <asp:LinkButton ID="btnChangePassword"  Text="Reset Password" Font-Size="Large" runat="server" ForeColor="White" Font-Bold="True" Font-Underline="False"></asp:LinkButton>
                <ajaxToolkit:ModalPopupExtender ID="mpe1" runat="server" 
               TargetControlID="btnChangePassword" 
               PopupControlID="panelResetPassword" 
@@ -245,7 +245,7 @@
                             </table>
      </asp:Panel>
          </td>
-         <td style ="width:12%;"> <asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>
+         <td style ="width:12%;"> <asp:Label ID="lblUsername" runat="server"  Font-Size="Large" Text=""></asp:Label>
              </td>
      </tr>
  </table>

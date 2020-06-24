@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -34,7 +35,7 @@ namespace projSFT
                 bindmenu();
 
                 BindMenuData();
-                lblUsername.Text = "Welcome " + (string)Session["Username"];
+                lblUsername.Text =  "Welcome " + (string)Session["Username"];
             }
 
         }
@@ -86,7 +87,7 @@ namespace projSFT
             if (item.Text == "Scope")
             {
                 item.Selected = true;
-                Response.Redirect("~/Topmenu.aspx");
+                Response.Redirect("~/Scope.aspx");
             }
 
             else if (item.Text == "Summary")
