@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -15,9 +14,12 @@ namespace projSFT
     public partial class ProjectManagement : System.Web.UI.MasterPage
     {
         SqlConnection con;
+        public string program = string.Empty;
+        public string tPage = string.Empty;
+
         public void Topmenu()
         {
-            string conString = string.Empty;
+
             try
             {
                 con = new SqlConnection();
@@ -32,10 +34,10 @@ namespace projSFT
         {
             if (!Page.IsPostBack)
             {
-                bindmenu();
+                Bindmenu();
 
                 BindMenuData();
-                lblUsername.Text =  "Welcome " + (string)Session["Username"];
+                lblUsername.Text = "Welcome " + (string)Session["Username"];
             }
 
         }
@@ -44,7 +46,7 @@ namespace projSFT
             ///new logic
             con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["SFT_AutomationConnectionString"].ToString();
-            SqlCommand cmd = new SqlCommand("select Id, ProgName from program", con);
+            SqlCommand cmd = new SqlCommand("select Id, ProgName from Program", con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -54,16 +56,16 @@ namespace projSFT
             DataRow[] droparent = dt.Select("Id >" + 0);
             foreach (DataRow dr in droparent)
             {
-                VerticalMenu.Items.Add(new MenuItem(dr["ProgName"].ToString()));
                 //VerticalMenu bind corresponding it to index bind to estimate page
+                VerticalMenu.Items.Add(new MenuItem(dr["ProgName"].ToString(), dr["id"].ToString()));
             }
         }
-        private void bindmenu()
-        {            
+        private void Bindmenu()
+        {
             ///new logic
             con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["SFT_AutomationConnectionString"].ToString();
-            SqlCommand cmd = new SqlCommand("select Id, menuname from top_menu", con);
+            SqlCommand cmd = new SqlCommand("select Id, Menuname from Top_menu", con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -73,7 +75,7 @@ namespace projSFT
             DataRow[] droparent = dt.Select("Id >" + 0);
             foreach (DataRow dr in droparent)
             {
-                NavigationMenu.Items.Add(new MenuItem(dr["menuname"].ToString()));
+                NavigationMenu.Items.Add(new MenuItem(dr["Menuname"].ToString(), dr["id"].ToString()));
             }
         }
         /// <summary>
@@ -83,23 +85,9 @@ namespace projSFT
         /// <param name="e"></param>
         protected void NavigationMenu_MenuItemClick1(object sender, MenuEventArgs e)
         {
-            MenuItem item = e.Item;
-            if (item.Text == "Scope")
-            {
-                item.Selected = true;
-                Response.Redirect("~/Scope.aspx");
-            }
-
-            else if (item.Text == "Summary")
-            {
-                item.Selected = true;
-                Response.Redirect("~/Summary.aspx");
-            }
-            else if (item.Text == "Estimate")
-            {
-                item.Selected = true;
-                Response.Redirect("Estimates.aspx");
-            }
+            MenuItem item1 = e.Item;
+            ViewState["item1"] = item1.Text;
+            item1.Selected = true;
         }
         protected void Menu1_MenuItemDataBound1(object sender, MenuEventArgs e)
         {
@@ -116,7 +104,40 @@ namespace projSFT
         ///
         public void NavigationMenu_MenuItemClick2(object sender, MenuEventArgs e)
         {
-            
+            MenuItem item2 = e.Item;
+            ViewState["item2"] = item2.Value;
+
+
+            item2.Selected = true;
+            NavigateMe();
+        }
+        public void NavigateMe()
+        {
+
+            if (ViewState["item1"] != null)
+                tPage = ViewState["item1"].ToString();
+            if (ViewState["item2"] != null)
+                program = ViewState["item2"].ToString();
+
+            switch (tPage)
+            {
+                case "Scope":
+                    Session["id"] = program;
+                    Response.Redirect("~/Scope.aspx?Program=" + program);
+                    break;
+
+                case "Summary":
+                    Session["id"] = program;
+                    Response.Redirect("~/Summary.aspx?Program=" + program);
+                    break;
+                case "Estimate":
+                    Session["id"] = program;
+                    Response.Redirect("~/Estimates.aspx?Program=" + program);
+                    break;
+                default:
+                    break;
+            }
+
         }
         protected void Menu1_MenuItemDataBound2(object sender, MenuEventArgs e)
         {
@@ -144,7 +165,7 @@ namespace projSFT
                 con.Close();
                 txtPassword.Text = "";
                 txtConfirmPassword.Text = "";
-                Response.Write("<script>alert('Password Updated Successfully!');</script>");            
+                Response.Write("<script>alert('Password Updated Successfully!');</script>");
 
             }
         }

@@ -38,7 +38,6 @@
             line-height: 30px;  
             margin-top: 20px;  
             margin-left:15px;
-           /* font:bold;*/
         }  
         .ChildMenu:hover 
         {  
@@ -47,7 +46,6 @@
         .selected, .selected:hover 
         {  
             background-color: purple;  
-            color: White;  
         }  
         .level2 
         {  
