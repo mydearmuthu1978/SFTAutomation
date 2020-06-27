@@ -157,7 +157,7 @@ namespace projSFT
             {
                 SqlCommand cmd = new SqlCommand("prcUpdatePassword", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id", Session["Id"]);
+                cmd.Parameters.AddWithValue("@id", Session["UserId"]);
                 cmd.Parameters.AddWithValue("@password", Encryptpassword(txtPassword.Text));
                 con.Open();
                 cmd.ExecuteNonQuery();

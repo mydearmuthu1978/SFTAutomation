@@ -51,7 +51,7 @@ namespace projSFT
                 if (dt.Rows.Count > 0)
                 {
                     Session["Username"] = txtUsername.Text;
-                    Session["Id"] = dt.Rows[0].ItemArray[0];
+                    Session["UserId"] = dt.Rows[0].ItemArray[0];
                     Response.Redirect("Scope.aspx");
 
                 }
