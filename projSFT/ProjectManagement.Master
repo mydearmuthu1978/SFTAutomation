@@ -178,7 +178,7 @@
                 </asp:menu>
             </td>
          <td style ="width:10%;">
-                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+          <%--      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
              <asp:LinkButton ID="btnChangePassword"  Text="Reset Password" Font-Size="Large" runat="server" ForeColor="White" Font-Bold="True" Font-Underline="False"></asp:LinkButton>
                <ajaxToolkit:ModalPopupExtender ID="mpe1" runat="server" 
               TargetControlID="btnChangePassword" 
@@ -186,8 +186,8 @@
               RepositionMode="RepositionOnWindowResizeAndScroll"              
               PopupDragHandleControlID="panelResetPasswordTitle" 
               BackgroundCssClass="modalBackground"  >
-            </ajaxToolkit:ModalPopupExtender>
-             <asp:Panel ID="panelResetPassword" runat="server" style="display:none; border:double ;background-color:White; margin-top:5px;text-align:left;" ForeColor="Black" Width="580" Height="250">
+            </ajaxToolkit:ModalPopupExtender>--%>
+            <%-- <asp:Panel ID="panelResetPassword" runat="server" style="display:none; border:double ;background-color:White; margin-top:5px;text-align:left;" ForeColor="Black" Width="580" Height="250">
             <asp:Panel ID="panelResetPasswordTitle" runat="server" style="cursor:move;padding:2px;" HorizontalAlign="Right" BackColor="#9353A1" ForeColor="White" Height="25" ></asp:Panel>
             <table style="margin-top:0;" border="0">              
                             <tr>
@@ -241,7 +241,7 @@
                                 </td>
                             </tr>
                             </table>
-     </asp:Panel>
+     </asp:Panel>--%>
          </td>
          <td style ="width:12%;"> <asp:Label ID="lblUsername" runat="server"  Font-Size="Large" Text=""></asp:Label>
              </td>

@@ -150,25 +150,25 @@ namespace projSFT
             }
         }
 
-        protected void btnupdate_Click(object sender, EventArgs e)
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["SFT_AutomationConnectionString"].ToString();
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand("prcUpdatePassword", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id", Session["UserId"]);
-                cmd.Parameters.AddWithValue("@password", Encryptpassword(txtPassword.Text));
-                con.Open();
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                con.Close();
-                txtPassword.Text = "";
-                txtConfirmPassword.Text = "";
-                Response.Write("<script>alert('Password Updated Successfully!');</script>");
+        //protected void btnupdate_Click(object sender, EventArgs e)
+        //{
+        //    string connectionString = ConfigurationManager.ConnectionStrings["SFT_AutomationConnectionString"].ToString();
+        //    using (SqlConnection con = new SqlConnection(connectionString))
+        //    {
+        //        SqlCommand cmd = new SqlCommand("prcUpdatePassword", con);
+        //        cmd.CommandType = CommandType.StoredProcedure;
+        //        cmd.Parameters.AddWithValue("@id", Session["UserId"]);
+        //        cmd.Parameters.AddWithValue("@password", Encryptpassword(txtPassword.Text));
+        //        con.Open();
+        //        cmd.ExecuteNonQuery();
+        //        cmd.Dispose();
+        //        con.Close();
+        //        txtPassword.Text = "";
+        //        txtConfirmPassword.Text = "";
+        //        Response.Write("<script>alert('Password Updated Successfully!');</script>");
 
-            }
-        }
+        //    }
+        //}
 
         public string Encryptpassword(string password)
         {

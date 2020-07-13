@@ -9,51 +9,46 @@
             <tr>
                <td >
                     <asp:GridView ID="gv1" AllowPaging="True" BackColor="#f1f1f1" 
-                        AutoGenerateColumns="false" DataKeyNames="Id" BorderStyle="Double" BorderColor="#0083C1"
-                        style="Z-INDEX: 101; l: 8px; POSITION: absolute; TOP: 32px" Font-Size="Small"
-                        Font-Names="Verdana" runat="server" GridLines="None" OnRowDataBound="gv1_RowDataBound"
-                        OnRowUpdating = "gv1_RowUpdating" OnPageIndexChanging="gv1_PageIndexChanging"
-                        OnRowDeleting = "gv1_RowDeleting" OnRowEditing="gv1_RowEditing" OnRowCancelingEdit="gv1_RowCancelingEdit">                        
+                        AutoGenerateColumns="false" DataKeyNames="Id" style="Z-INDEX: 101; LEFT: 8px; POSITION: absolute; TOP: 32px" 
+                        ShowFooter="true"  Font-Size="Small" Font-Names="Verdana" runat="server" GridLines="None"
+                        OnRowUpdating = "gv1_RowUpdating" OnPageIndexChanging="gv1_PageIndexChanging" BorderStyle="Outset"
+                        OnRowDeleting = "gv1_RowDeleting" OnRowEditing="gv1_RowEditing" OnRowCancelingEdit="gv1_RowCancelingEdit"> 
+                        <RowStyle BackColor="Gainsboro" HorizontalAlign="Center"/>
+                        <AlternatingRowStyle BackColor="White" />
+                        <HeaderStyle BackColor="#0083C1" ForeColor="White"/>
 			            <Columns>       
                                 
-                                <asp:TemplateField  SortExpression="Id">
+                                <asp:TemplateField HeaderText="Id" Visible="false" SortExpression="Id">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblAppID" Text='<%# Eval("Id") %>' Visible="false" runat="server"></asp:Label>
+                                        <asp:Label ID="lbl_ID" runat="server" Text='<%# Eval("Id") %>' Visible="false" />                                        
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="App Name">
-                                    <ItemTemplate >
-                                        <asp:Label ID="lblAppname" runat="server" Text='<%# Eval("Appname") %>' ></asp:Label>
-                                    </ItemTemplate>                                    
-                                        <EditItemTemplate >
-                                           <asp:TextBox ID="txtAppName" runat="server" Text='<%# Eval("Appname")%>'  ></asp:TextBox>
-                                        </EditItemTemplate>
+                                <asp:TemplateField HeaderText="Id" Visible="false">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbl_TaskID" runat="server" Text='<%# Eval("Id") %>' Visible="false" />
+                                    </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:BoundField DataField="Appname" HeaderText="Appname" ReadOnly="true" SortExpression="Appname" />
                                 <asp:TemplateField HeaderText="Priority">  
                                     <ItemTemplate>                                          
                                         <asp:Label ID="Priority" runat="server" Text='<%# Eval("Priority")%>'></asp:Label>
                                     </ItemTemplate>  
                                     <EditItemTemplate>  
-                                          <asp:DropDownList ID="ddlPriority" runat="server" AutoPostBack="true" AppendDataBoundItems="True"></asp:DropDownList>  
+                                          <asp:DropDownList ID="ddlPriority" runat="server" Text='<%#Eval("Priority") %>' AppendDataBoundItems="True">
+                                            <asp:ListItem Value="Full Functional" Text="Full Functional"></asp:ListItem>
+                                            <asp:ListItem Value="Sanity" Text="Sanity"></asp:ListItem>
+                                            <asp:ListItem Value="Regression" Text="Regression"></asp:ListItem>
+                                            <asp:ListItem Value="PML" Text="PML"></asp:ListItem>
+                                         </asp:DropDownList>
                                     </EditItemTemplate>                                                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Time Taken(Hrs)">
-                                    <ItemTemplate >
-                                        <asp:TextBox ID="txtTimeTaken" runat="server" Text='<%# Eval("TimeTaken") %>' ></asp:TextBox>
-                                    </ItemTemplate>
+                                    <ItemTemplate ><%# Eval("TimeTaken") %></ItemTemplate>
                                         <EditItemTemplate >
                                             <asp:TextBox ID="txtTimeTaken" runat="server" Text='<%# Eval("TimeTaken")%>'  ></asp:TextBox>
                                         </EditItemTemplate>
-                                </asp:TemplateField>                                 
-                                <asp:TemplateField>  
-                                    <ItemTemplate>  
-                                        <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" />  
-                                    </ItemTemplate>  
-                                    <EditItemTemplate>  
-                                        <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update"/>  
-                                        <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel"/>  
-                                    </EditItemTemplate>  
-                                </asp:TemplateField>
+                                </asp:TemplateField>  
+                                <asp:CommandField  ShowEditButton="True"/>                                
                         </Columns>
                         <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
                         <HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
